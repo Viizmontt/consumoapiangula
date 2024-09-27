@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<div class="card m-5">
+    <a routerLink="/createCategory" pButton icon="pi pi-plus" class="p-button-rounded p-button-contrast">
+    </a>
+    
+    <p-table [value]="categories" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a routerLink="/editCategory/{{category.id}}" pButton icon="pi pi-pencil"
+                        class="p-button-rounded p-button-info mr-2">
+                    </a>
+                    <button pButton icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteCategory(category.id)">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

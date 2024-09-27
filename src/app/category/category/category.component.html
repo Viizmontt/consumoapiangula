@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<div class="card m-5">
+    <div class="flex justify-content-center align-items-center min-h-screan w-full">
+        <p-card header="Categoria" class="w-6">
+            <form [formGroup]="formCategory" (ngSubmit)="edit ? updateCategory() : createCategory()"
+                class="flex flex-column gap-2">
+                
+                <div class="flex flex-column gap-1">
+                    <div class="flex flex-column gap-2">
+                        <label for="username">Nombre</label>
+                        <input type="text" pInputText formControlName="name" />
+                        <small id="name">
+                            Nombre de la categoria
+                        </small>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="flex gap-2">
+                    <p-button 
+                        type="submit" 
+                        [label]="edit ? 'Actualizar' : 'Crear'"
+                        [loading]="isSaveInProgress" >
+                    </p-button>
+                    <p-button routerLink="/products" label="Cancelar" styleClass="p-button-secondary"></p-button>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<p-toast></p-toast>
+<div class="card m-5">
+    <div class="flex justify-content-center align-items-center w-full">
+        <p-card [header]="edit ? 'Editar Producto' : 'Crear Producto'" class="w-6">
+            <form [formGroup]="formProduct" (ngSubmit)="saveProduct()" class="flex flex-column gap-2">
+                <!-- Name Field -->
+                <div class="flex flex-column gap-2">
+                    <label for="name">Nombre</label>
+                    <input 
+                        id="name"  
+                        type="text"    
+                        pInputText formControlName="name" 
+                    />
+                    <small *ngIf="formProduct.get('name')?.hasError('required') && formProduct.get('name')?.touched"
+                        class="p-error">El nombre es requerido</small>
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="flex flex-column gap-2">
+                    <label for="category">Categoría</label>
+                    <p-dropdown 
+                        id="category" 
+                        [options]="categories" 
+                        formControlName="category" 
+                        optionLabel="name" 
+                        [showClear]="true" 
+                        placeholder="Seleccione una categoría"
+                        [style]="{'width':'100%'}"
+                    >
+                    </p-dropdown>
+                    <small *ngIf="formProduct.get('category')?.hasError('required') && formProduct.get('category')?.touched"
+                        class="p-error">La categoría es requerida</small>
+                </div>
+
+                <!-- Price Field -->
+                <div class="flex flex-column gap-2">
+                    <label for="price">Precio</label>
+                    <p-inputNumber 
+                        id="price" 
+                        formControlName="price" 
+                        mode="currency" 
+                        currency="USD"
+                        locale="en-US">
+                    </p-inputNumber>
+                    <small *ngIf="formProduct.get('price')?.hasError('required') && formProduct.get('price')?.touched"
+                        class="p-error">El precio es requerido</small>
+                    <small *ngIf="formProduct.get('price')?.hasError('min') && formProduct.get('price')?.touched"
+                        class="p-error">El precio debe ser mayor o igual a 0
+                    </small>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-2">
+                    <p-button 
+                        type="submit" 
+                        [label]="edit ? 'Actualizar' : 'Crear'"
+                        [disabled]="formProduct.invalid">
+                    </p-button>
+                    <p-button routerLink="/products" label="Cancelar" styleClass="p-button-secondary"></p-button>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</div>
